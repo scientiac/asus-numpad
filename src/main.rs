@@ -175,7 +175,7 @@ impl Numpad {
     /// Toggle numlock when user presses the numlock bbox on touchpad.
     fn toggle_numlock(&mut self) -> Result<()> {
         if self.state.toggle_numlock() {
-            self.touchpad_i2c.set_brightness(self.state.brightness)?;
+            self.touchpad_i2c.set_brightness(Brightness::Full)?;
             // don't grab touchpad - allow moving pointer even if active
         } else {
             self.touchpad_i2c.set_brightness(Brightness::Zero)?;
