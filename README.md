@@ -25,7 +25,7 @@ This builds upon the work done in [asus-touchpad-numpad-driver](https://github.c
 
 ### Compile from source
 * Install the Rust 2021 toolchain using [`Rustup`](https://rustup.rs)
-* `sudo -E cargo install --root /usr --git="https://github.com/iamkroot/asus-numpad"`
+* `sudo -E <path-to-user-home>/.cargo/bin/cargo install --root /usr --git="<url of the remote repository>"`
 
 ## Run
 * `sudo modprobe i2c-dev` and `sudo modprobe uinput`
@@ -51,6 +51,12 @@ After a reboot, check that the permissions are correct:
 * `ls -l /dev/uinput` should show `crw-rw---- 1 root uinput ... /dev/uinput` (The `uinput` after `root` is important)
 * Similarly, `ls -l /dev/i2c-*` should be owned by `i2c` group
 * Finally, `groups asus_numpad` should include `input`, `i2c` and `uinput`.
+
+If it isn't correctly set:
+```bash
+sudo chown root:uinput /dev/uinput
+sudo chmod 660 /dev/uinput
+```
 
 ## Systemd Service
 To enable autoloading at boot, a systemd service has been provided.
